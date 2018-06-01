@@ -1,0 +1,46 @@
+query getAllMessages {
+  allMessages {
+    ...messageFields
+  }
+}
+
+query getMessageById($id: String!) {
+  messageById(id: $id) {
+    ...messageFields
+  }
+}
+
+query getMessagesByName($user: String!) {
+  messagesByUser(user: $user) {
+    ...messageFields
+  }
+}
+
+query getMessagesLength {
+  messagesLength
+}
+
+mutation addMessage($input: MessageInput) {
+  addMessage(input: $input) {
+    ...messageFields
+  }
+}
+
+mutation updateMessage($input: MessageInput) {
+  updateMessage(input: $input) {
+    ...messageFields
+  }
+}
+
+mutation deleteMessage($id: String!) {
+  deleteMessage(id: $id) {
+    ...messageFields
+  }
+}
+
+fragment messageFields on Message {
+  id
+  user
+  message
+  timestamp
+}
