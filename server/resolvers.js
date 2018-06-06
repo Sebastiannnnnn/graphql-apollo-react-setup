@@ -2,8 +2,6 @@ import jsonfile from 'jsonfile';
 import ChatMessage from './mongoose/chatmessage'
 import mongoose from 'mongoose';
 
-let file = 'server/data/messages.json';
-
 //TODO place correct URI and user id here
 mongoose.connect('mongodb://<host>', {user: '<user>', pass: '<pass>'})
 .catch(function (err) {

@@ -10,19 +10,25 @@ To run this application, execute the following commands:
     $ npm install
     ```
 
-  2. Start client side server:
+  2. Update Mongo configuration with correct host and user ids in resolvers.js:
+
+    ```
+    mongoose.connect('mongodb://<host>', {user: '<user>', pass: '<pass>'})
+    ```
+
+  3. Start client side server:
 
     ```
     $ npm run start
     ```
 
-  3. Start back-end server
+  4. Start back-end server
 
     ```
     $ npm run dev
     ```
 
-  4. or start both
+  5. or start both
 
     ```
     $ npm run all
