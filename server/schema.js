@@ -23,7 +23,7 @@ const typeDefs = [`
     type Mutation {
         addMessage(input: MessageInput): Message
         updateMessage(input: MessageInput): Message
-        deleteMessage(id: String!): Message
+        deleteMessage(id: String!): String
     }
 `];
 
