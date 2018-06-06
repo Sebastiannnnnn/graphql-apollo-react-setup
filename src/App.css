@@ -113,6 +113,22 @@ ul {
     float: left;
 }
 
+.update-id {
+    width: 30%;
+    height: 30px;
+    line-height: 24px;
+    padding: 0px 5px ;
+    float: left;
+}
+
+.update-input {
+    width: 50%;
+    height: 30px;
+    line-height: 24px;
+    padding: 0px 5px;
+    float: left;
+}
+
 .message-submit {
     width: 120px;
     height: 30px;

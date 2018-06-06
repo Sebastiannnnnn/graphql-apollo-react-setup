@@ -7,7 +7,7 @@ const ADD_MESSAGE = gql`
     addMessage(input: $input) {
       id
       user
-      message,
+      message
       timestamp
     }
   }

@@ -6,6 +6,8 @@ import './App.css';
 
 import { Messages } from './components/Messages';
 import { AddMessage } from './components/AddMessage';
+import { UpdateMessage } from './components/UpdateMessage';
+import { DeleteMessage } from './components/DeleteMessage';
 
 const messageClient = new ApolloClient({
     uri: `http://localhost:4000/graphql`
@@ -28,6 +30,8 @@ class App extends Component {
                     <div>
                         <Messages username={username}/>
                         <AddMessage username={username}/>
+                        <UpdateMessage username={username}/>
+                        <DeleteMessage username={username}/>
                     </div>
                 </ApolloProvider>
             </div>

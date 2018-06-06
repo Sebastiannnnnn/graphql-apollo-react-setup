@@ -1,24 +1,34 @@
 import jsonfile from 'jsonfile';
+import ChatMessage from './mongoose/chatmessage'
+import mongoose from 'mongoose';
 
 let file = 'server/data/messages.json';
+
+//TODO place correct URI and user id here
+mongoose.connect('mongodb://<host>', {user: '<user>', pass: '<pass>'})
+.catch(function (err) {
+    console.log("Exception in connecting", err);
+});
+
+var db = mongoose.connection;
+db.on('error', ()=> {console.log( 'FAILED to connect to MongoDB')})
+db.once('open', () => {console.log( 'Connected to MongoDB')})
 
 const resolvers = {
     Query: {
         allMessages: () => {
-            return jsonfile.readFileSync(file);
+            return ChatMessage.find();
         },
         messagesByUser: (root, {user}) => {
-            return jsonfile.readFileSync(file).filter(message => {
-                return message.user === user;
-            });
+            return ChatMessage.find({user: user});
         },
         messageById: (root, {id}) => {
-            return jsonfile.readFileSync(file).filter(message => {
-                return message.id === id;
-            })[0];
+            return ChatMessage.find({id: id});
         },
         messagesLength: () => {
-            return jsonfile.readFileSync(file).length;
+            ChatMessage.find({}, function(err, results) {
+                return results.length;
+            })
         }
     },
     Mutation: {
@@ -27,43 +37,29 @@ const resolvers = {
             input.id = input.user + '-' + time;
             input.timestamp = new Date().getTime();
 
-            let messages = jsonfile.readFileSync(file);
-            messages.push(input);
-            jsonfile.writeFileSync(file, messages);
+            var message = new ChatMessage(input);
+
+            message.save(function (err, message) {
+                if (err) console.error(err);
+            });
 
             return input;
         },
         updateMessage: (root, {input}) => {
             input.timestamp = new Date().getTime();
 
-            let messages = jsonfile.readFileSync(file);
-            let item;
-
-            for (var i = 0; i < messages.length; i++) {
-                if (messages[i].id === input.id) {
-                    messages[i] = Object.assign({}, messages[i], input);
-                    break;
-                }
-            }
-
-            jsonfile.writeFileSync(file, messages);
+            ChatMessage.findOneAndUpdate({ id: input.id, user: input.user }, {$set: {message : input.message, timestamp : input.timestamp} }, function(err, doc){
+                if(err) console.log(err);
+            });
 
             return input;
         },
         deleteMessage: (root, {id}) => {
-            let messages = jsonfile.readFileSync(file);
-            let item;
+            ChatMessage.findOneAndRemove({ id: id}, function(err, message){
+                if(err) console.log(err);
+            });
 
-            for (var i = 0; i < messages.length; i++) {
-                if (messages[i].id === id) {
-                    item = messages.splice(i, 1);
-                    break;
-                }
-            }
-
-            jsonfile.writeFileSync(file, messages);
-
-            return item[0];
+            return id;
         }
     }
 }

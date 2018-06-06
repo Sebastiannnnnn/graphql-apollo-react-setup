@@ -46,7 +46,7 @@ export class Messages extends React.Component {
                                     <div className={'message ' + ((message.user === this.props.username) ? 'own': 'other')}>
                                         <div className={'user'}>
                                             <span className={'name'}>
-                                                {message.user + ':'}
+                                                {message.user + ' (' + message.id + '):'}
                                             </span>
                                             <span className={'time'}>
                                                 { getTime(message.timestamp) }
