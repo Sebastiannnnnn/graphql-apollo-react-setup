@@ -28,12 +28,11 @@ export class AddMessage extends React.Component {
                         <form className={'message-form'}
                           onSubmit={e => {
                             e.preventDefault();
-
                             if (input.value) {
                               let variables = {
                                 input: {
                                   id: new Date().getUTCMilliseconds(),
-                                  user: context.username,
+                                  user: context.state.username,
                                   message: input.value
                                 }
                               };
@@ -49,7 +48,7 @@ export class AddMessage extends React.Component {
                           <button className={'message-submit'} type="submit">Add message</button>
                         </form>
                       )}
-                  </MyContext.Consumer>
+                </MyContext.Consumer>
                 )}
             </Mutation>
         )

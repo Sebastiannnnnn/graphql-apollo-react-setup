@@ -24,25 +24,21 @@ export class UpdateMessage extends React.Component {
             <Mutation
                 mutation={UPDATE_MESSAGE}>
                 {updateMessage => (
+              <MyContext.Consumer>
+                {context => (
                     <form className={'message-form'}
                         onSubmit={e => {
                             e.preventDefault();
 
                             if (msg.value) {
-                             
                               let variables = {};
-                              <MyContext.Consumer>
-                                {context => (
-                                  variables = {
-                                    input: {
-                                        id: msgid.value,
-                                        user: context.username,
-                                        message: msg.value
-                                    }
-                                }
-                                )}
-                              </MyContext.Consumer>
-                                
+                                variables = {
+                                  input: {
+                                      id: msgid.value,
+                                      user: context.state.username,
+                                      message: msg.value
+                                  }
+                              }
                                 updateMessage({ variables });
                                 msgid.value = "";
                                 msg.value = "";
@@ -60,6 +56,8 @@ export class UpdateMessage extends React.Component {
                         />
                         <button className={'message-submit'} type="submit">Update message</button>
                     </form>
+                )}
+              </MyContext.Consumer>
                 )}
             </Mutation>
         )
