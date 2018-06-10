@@ -2,6 +2,8 @@ import React from 'react';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 
+import { MyContext } from '../MyProvider';
+
 const UPDATE_MESSAGE = gql`
   mutation updateMessage($input: MessageInput) {
     updateMessage(input: $input) {
@@ -27,13 +29,19 @@ export class UpdateMessage extends React.Component {
                             e.preventDefault();
 
                             if (msg.value) {
-                                let variables = {
+                             
+                              let variables = {};
+                              <MyContext.Consumer>
+                                {context => (
+                                  variables = {
                                     input: {
                                         id: msgid.value,
-                                        user: this.props.username,
+                                        user: context.username,
                                         message: msg.value
                                     }
-                                };
+                                }
+                                )}
+                              </MyContext.Consumer>
                                 
                                 updateMessage({ variables });
                                 msgid.value = "";

@@ -2,6 +2,8 @@ import React from 'react';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 
+import { MyContext } from '../MyProvider';
+
 const ADD_MESSAGE = gql`
   mutation addMessage($input: MessageInput) {
     addMessage(input: $input) {
@@ -21,30 +23,33 @@ export class AddMessage extends React.Component {
             <Mutation
                 mutation={ADD_MESSAGE}>
                 {addMessage => (
-                    <form className={'message-form'}
-                        onSubmit={e => {
+                  <MyContext.Consumer>
+                      {context => (
+                        <form className={'message-form'}
+                          onSubmit={e => {
                             e.preventDefault();
 
                             if (input.value) {
-                                let variables = {
-                                    input: {
-                                        id: new Date().getUTCMilliseconds(),
-                                        user: this.props.username,
-                                        message: input.value
-                                    }
-                                };
-
-                                addMessage({ variables });
-                                input.value = "";
+                              let variables = {
+                                input: {
+                                  id: new Date().getUTCMilliseconds(),
+                                  user: context.username,
+                                  message: input.value
+                                }
+                              };
+                              addMessage({ variables });
+                              input.value = "";
                             }
-                        }}>
-                        <input className={'message-input'}
+                          }}>
+                          <input className={'message-input'}
                             ref={node => {
-                                input = node;
+                              input = node;
                             }}
-                        />
-                        <button className={'message-submit'} type="submit">Add message</button>
-                    </form>
+                          />
+                          <button className={'message-submit'} type="submit">Add message</button>
+                        </form>
+                      )}
+                  </MyContext.Consumer>
                 )}
             </Mutation>
         )
