@@ -6,12 +6,7 @@ import { MyContext } from '../MyProvider';
 
 const ADD_MESSAGE = gql`
   mutation addMessage($input: MessageInput) {
-    addMessage(input: $input) {
-      id
-      user
-      message
-      timestamp
-    }
+    //TODO mutation to add a message
   }
 `;
 

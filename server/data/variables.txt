@@ -1,9 +1,0 @@
-{
-  "id": "Sebastian-1527859089916",
-  "user": "Sebastian",
-  "input": {
-    "id": "Sebastian-1527859089916",
-    "user": "Sebastian",
-    "message": "Pure"
-  }
-}

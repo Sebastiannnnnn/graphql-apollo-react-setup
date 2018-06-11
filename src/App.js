@@ -8,12 +8,9 @@ import MyProvider, {MyContext} from './MyProvider';
 import UsernameField from './components/UsernameField';
 import { Messages } from './components/Messages';
 import { AddMessage } from './components/AddMessage';
-import { UpdateMessage } from './components/UpdateMessage';
-import { DeleteMessage } from './components/DeleteMessage';
 
-const messageClient = new ApolloClient({
-    uri: `http://localhost:4000/graphql`
-});
+//TODO: point messageClient (ApolloClient) to the GraphQL server endpoint
+const messageClient;
 
 class App extends Component {
     render() {
@@ -33,8 +30,6 @@ class App extends Component {
                       <div>Your username: {context.state.username}</div>
                       <Messages />
                       <AddMessage />
-                      <UpdateMessage />
-                      <DeleteMessage />
                     </React.Fragment>
                   </ApolloProvider>
                 )

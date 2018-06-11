@@ -4,14 +4,11 @@ import { Query } from "react-apollo";
 
 import { MyContext } from '../MyProvider';
 
+//TODO set component to poll for updates
+
 const GET_MESSAGES = gql`
   {
-    allMessages {
-      id
-      user
-      message
-      timestamp
-    }
+    //TODO query to get messages
   }
 `;
 
@@ -35,7 +32,7 @@ export class Messages extends React.Component {
         return (
             <Query
                 query={GET_MESSAGES}
-                pollInterval={500}
+                
                 >
                 {({ loading, error, data }) => {
                     if (loading) return "Loading...";
