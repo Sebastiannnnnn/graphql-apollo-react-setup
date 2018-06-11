@@ -16,7 +16,7 @@ const typeDefs = [`
     },
     type Query {
         allMessages: [Message]
-        messageById(id: String!): [Message]
+        messageById(id: String!): Message
         messagesByUser(user: String!): [Message]
         messagesLength: Int
     },

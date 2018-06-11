@@ -15,31 +15,48 @@ var db = mongoose.connection;
 db.on('error', ()=> {console.log( 'FAILED to connect to MongoDB')})
 db.once('open', () => {console.log( 'Connected to MongoDB')})
 
+let resultSet = null;
 const resolvers = {
     Query: {
-        allMessages: () => {
-            return ChatMessage.find()
-            .then((res) => {
-                return res;
-            })
+        allMessages: async () => {
+            await ChatMessage.find()
+                .then((res) => {
+                    resultSet = res;
+                }).catch((err) => {
+                    resultSet = new Error('Error happened');
+                });
+
+            return resultSet;
         },
-        messagesByUser: (root, {user}) => {
-            return ChatMessage.find({user: user})
-            .then((res) => {
-                return res;
-            })
+        messagesByUser: async (root, {user}) => {
+            await ChatMessage.find({user: user})
+                .then((res) => {
+                    resultSet = res;
+                }).catch((err) => {
+                    resultSet = new Error('Error happened');
+                });
+
+            return resultSet;
         },
-        messageById: (root, {id}) => {
-            return ChatMessage.find({id: id})
-            .then((res) => {
-                return res;
-            })
+        messageById: async (root, {id}) => {
+            await ChatMessage.find({id: id})
+                .then((res) => {
+                    resultSet = res[0];
+                }).catch((err) => {
+                    resultSet = new Error('Error happened');
+                });
+
+            return resultSet;
         },
-        messagesLength: () => {
-            return ChatMessage.count({})
-            .then((res) => {
-                return res
-            });
+        messagesLength: async () => {
+            await ChatMessage.count({})
+                .then((res) => {
+                    resultSet = res
+                }).catch((err) => {
+                    resultSet = new Error('Error happened');
+                });
+
+            return resultSet;
         }
     },
     Mutation: {
@@ -50,7 +67,6 @@ const resolvers = {
 
             var message = new ChatMessage(input);
 
-            let resultSet = null;
             await message.save(message)
                 .then((res) => {
                     resultSet = res;
@@ -64,11 +80,14 @@ const resolvers = {
             input.timestamp = new Date().getTime();
             let conditions = { id: input.id };
             let update = {$set: {message : input.message} }
-            let options = { upsert: true, new: true };
+            let options = { new: true };
 
-            let resultSet;
             await ChatMessage.findOneAndUpdate(conditions, update, options)
                 .then((res) => {
+                    if (!res) {
+                        resultSet = new Error('Entry does not exist');
+                        return;
+                    }
                     resultSet = res;
                 }).catch((err) => {
                     resultSet = new Error('Error happened');
@@ -78,9 +97,13 @@ const resolvers = {
         },
         deleteMessage: async (root, {id}) => {
             let conditions = {id: id};
-            let resultSet;
+
             await ChatMessage.findOneAndRemove(conditions)
                 .then((res) => {
+                    if (!res) {
+                        resultSet = new Error('Entry does not exist');
+                        return;
+                    }
                     resultSet = res;
                 }).catch((err) => {
                     resultSet = new Error('Error happened');

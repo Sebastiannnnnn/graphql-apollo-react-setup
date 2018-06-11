@@ -1,5 +1,5 @@
 {
-  "searchId": "Gurden-1528733231643",
+  "searchId": "Sebastian-1528750534997",
   "searchUser": "Sebastian",
   "addMessage": {
     "user": "Sebastian",
@@ -9,5 +9,5 @@
     "id": "Sebastian-1528750534997",
     "message": "hello world"
   },
-  "deleteMessage": "Sebastian-1528750637856"
+  "deleteMessage": "Sebastian-1528752527301"
 }
