@@ -2,8 +2,6 @@ import React from 'react';
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
-import { MyContext } from '../MyProvider';
-
 const GET_MESSAGES = gql`
   {
     allMessages {
@@ -45,10 +43,8 @@ export class Messages extends React.Component {
                         <ul>
                             {data.allMessages.map(message => (
                                 <li className={'row'} key={message.id}>
-                            <MyContext.Consumer>
-                              {context => (
                                 <React.Fragment>
-                                  <div className={'message ' + ((message.user === context.state.username) ? 'own' : 'other')}>
+                                  <div className={'message ' + ((message.user === this.props.username) ? 'own' : 'other')}>
                                     <div className={'user'}>
                                       <span className={'name'}>
                                         {message.user + ' (' + message.id + '):'}
@@ -60,8 +56,6 @@ export class Messages extends React.Component {
                                     <div className={'content'}>{message.message}</div>
                                   </div>
                                 </React.Fragment>
-                              )}
-                            </MyContext.Consumer>
                                 </li>
                             ))}
                             <li className={'clear'}></li>
