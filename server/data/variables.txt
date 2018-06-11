@@ -1,9 +1,13 @@
 {
-  "id": "Sebastian-1528738334042",
-  "user": "Sebastian",
-  "input": {
-    "id": "Sebastian",
+  "searchId": "Gurden-1528733231643",
+  "searchUser": "Sebastian",
+  "addMessage": {
     "user": "Sebastian",
-    "message": "Change"
-  }
+    "message": "a1"
+  },
+  "updateMessage": {
+    "id": "Sebastian-1528750534997",
+    "message": "hello world"
+  },
+  "deleteMessage": "Sebastian-1528750637856"
 }
