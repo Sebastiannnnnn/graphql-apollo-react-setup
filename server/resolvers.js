@@ -1,7 +1,8 @@
-import jsonfile from 'jsonfile';
 import ChatMessage from './mongoose/chatmessage'
 import mongoose from 'mongoose';
 import { host, login } from './constants';
+
+"use strict";
 
 mongoose.connect(host, login)
 .catch(function (err) {
@@ -53,10 +54,8 @@ const resolvers = {
             return input;
         },
         deleteMessage: (root, {id}) => {
-            ChatMessage.findOneAndRemove({ id: id}, function(err, message){
+            ChatMessage.findOneAndRemove({id: id}, function(err, message){
                 if(err) console.log(err);
-
-                return message;
             });
 
             return id;

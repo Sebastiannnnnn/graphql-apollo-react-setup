@@ -33,9 +33,7 @@ mutation updateMessage($input: MessageInput) {
 }
 
 mutation deleteMessage($id: String!) {
-  deleteMessage(id: $id) {
-    ...messageFields
-  }
+  deleteMessage(id: $id)
 }
 
 fragment messageFields on Message {
