@@ -18,12 +18,7 @@
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "all": "npm-run-all --parallel dev start",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "dev": "babel-watch server/"
+    "server": "babel-watch server/"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
