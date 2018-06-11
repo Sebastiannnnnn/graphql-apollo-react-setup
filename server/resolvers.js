@@ -1,9 +1,10 @@
-import jsonfile from 'jsonfile';
 import ChatMessage from './mongoose/chatmessage'
 import mongoose from 'mongoose';
+import { host, login } from './constants';
 
-//TODO place correct URI and user id here
-mongoose.connect('mongodb://<host>', {user: '<user>', pass: '<pass>'})
+"use strict";
+
+mongoose.connect(host, login)
 .catch(function (err) {
     console.log("Exception in connecting", err);
 });
@@ -24,9 +25,9 @@ const resolvers = {
             return ChatMessage.find({id: id});
         },
         messagesLength: () => {
-            ChatMessage.find({}, function(err, results) {
-                return results.length;
-            })
+            return ChatMessage.count({}, function(err, results) {
+                return results;
+            });
         }
     },
     Mutation: {

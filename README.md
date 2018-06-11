@@ -1,6 +1,6 @@
 # graphql-apollo-react-setup
 
-This is GraphQL - Apollo - React test setup
+This is GraphQL - Apollo - React setup
 
 To run this application, execute the following commands:
 
@@ -10,25 +10,14 @@ To run this application, execute the following commands:
     $ npm install
     ```
 
-  2. Update Mongo configuration with correct host and user ids in resolvers.js:
+  2. Update Mongo configuration with correct host and user ids in constants.js:
 
     ```
-    mongoose.connect('mongodb://<host>', {user: '<user>', pass: '<pass>'})
+    export const host = 'mongodb://<host>';
+    export const login = {user: '<user>', pass: '<pass>'};
     ```
 
-  3. Start client side server:
-
-    ```
-    $ npm run start
-    ```
-
-  4. Start back-end server
-
-    ```
-    $ npm run dev
-    ```
-
-  5. or start both
+  3. Run client and backend servers
 
     ```
     $ npm run all
