@@ -8,7 +8,8 @@ class MyProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'Sebastian',
+      username: '',
+      usernameSet: false
     };
   }
   render() {
@@ -17,6 +18,9 @@ class MyProvider extends Component {
         state: this.state,
         changeUsername: (event) => this.setState({
           username: event.target.value
+        }),
+        saveUsername: () => this.setState({
+          usernameSet: true
         })
       }
       }>
