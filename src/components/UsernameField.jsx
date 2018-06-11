@@ -6,7 +6,7 @@ export default class UsernameField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'Sebastian'
+      username: ''
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -15,11 +15,18 @@ export default class UsernameField extends React.Component {
   }
 
   render() {
-    return (<MyContext.Consumer>
+    return (
+    <MyContext.Consumer>
       {context => (
-        <input type='text' name='username'
-          onChange={context.changeUsername} />
+        <React.Fragment>
+          <label>Enter username</label>
+          <input type='text' name='username' disabled={context.state.usernameSet}
+            onChange={context.changeUsername} />
+          <button name='button' onClick={context.saveUsername}>
+            Save
+          </button>
+        </React.Fragment>
         )}
-       </MyContext.Consumer>);
+    </MyContext.Consumer>);
   }
 }
