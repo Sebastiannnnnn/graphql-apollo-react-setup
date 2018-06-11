@@ -10,26 +10,16 @@ To run this application, execute the following commands:
     $ npm install
     ```
 
-  2. Update Mongo configuration with correct host and user ids in resolvers.js:
+  2. Update Mongo configurations with correct host and login information in constants.js:
 
     ```
     mongoose.connect('mongodb://<host>', {user: '<user>', pass: '<pass>'})
     ```
 
-  3. Start client side server:
+  3. Start graphql server
 
     ```
-    $ npm run start
+    $ npm run server
     ```
 
-  4. Start back-end server
-
-    ```
-    $ npm run dev
-    ```
-
-  5. or start both
-
-    ```
-    $ npm run all
-    ```
+  5. go to http://localhost:4000/graphiql
