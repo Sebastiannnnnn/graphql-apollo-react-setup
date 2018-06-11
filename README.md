@@ -1,6 +1,6 @@
 # graphql-apollo-react-setup
 
-This is GraphQL - Apollo - React test setup
+This is GraphQL setup
 
 To run this application, execute the following commands:
 
