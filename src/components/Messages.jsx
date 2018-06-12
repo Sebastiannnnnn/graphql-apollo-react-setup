@@ -2,8 +2,6 @@ import React from 'react';
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
-import { MyContext } from '../MyProvider';
-
 //TODO set component to poll for updates
 
 const GET_MESSAGES = gql`
@@ -41,25 +39,22 @@ export class Messages extends React.Component {
                     return (
                         <ul>
                             {data.allMessages.map(message => (
-                                <li className={'row'} key={message.id}>
-                            <MyContext.Consumer>
-                              {context => (
-                                <React.Fragment>
-                                  <div className={'message ' + ((message.user === context.state.username) ? 'own' : 'other')}>
-                                    <div className={'user'}>
-                                      <span className={'name'}>
-                                        {message.user + ' (' + message.id + '):'}
-                                      </span>
-                                      <span className={'time'}>
-                                        {getTime(message.timestamp)}
-                                      </span>
-                                    </div>
-                                    <div className={'content'}>{message.message}</div>
+                              <li className={'row'} key={message.id}>
+                              <React.Fragment>
+                                <div className={'message ' + ((message.user === this.props.username) ? 'own' : 'other')}>
+                                  <div className={'user'}>
+                                    <span className={'name'}>
+                                      {message.user + ' (' + message.id + '):'}
+                                    </span>
+                                    <span className={'time'}>
+                                      {getTime(message.timestamp)}
+                                    </span>
                                   </div>
-                                </React.Fragment>
-                              )}
-                            </MyContext.Consumer>
-                                </li>
+                                  <div className={'content'}>{message.message}</div>
+                                </div>
+                              </React.Fragment>
+                            )}
+                            </li>
                             ))}
                             <li className={'clear'}></li>
                         </ul>
