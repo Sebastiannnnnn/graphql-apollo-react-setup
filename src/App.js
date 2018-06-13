@@ -9,7 +9,8 @@ import { AddMessage } from './components/AddMessage';
 
 //TODO: point messageClient (ApolloClient) to the GraphQL server endpoint
 let messageClient;
-let username = 'Sebastian';
+
+let username = 'IDidNotChangeMyName';
 
 class App extends Component {
   state = { username: username };
