@@ -30,7 +30,6 @@ export class Messages extends React.Component {
         return (
             <Query
                 query={GET_MESSAGES}
-                
                 >
                 {({ loading, error, data }) => {
                     if (loading) return "Loading...";
@@ -43,7 +42,7 @@ export class Messages extends React.Component {
                               <React.Fragment>
                                 <div className={'message ' + ((message.user === this.props.username) ? 'own' : 'other')}>
                                   <div className={'user'}>
-                                    <span className={'name'}>
+                                  <span className={'name'}>
                                       {message.user + ' (' + message.id + '):'}
                                     </span>
                                     <span className={'time'}>
@@ -53,7 +52,6 @@ export class Messages extends React.Component {
                                   <div className={'content'}>{message.message}</div>
                                 </div>
                               </React.Fragment>
-                            )}
                             </li>
                             ))}
                             <li className={'clear'}></li>
